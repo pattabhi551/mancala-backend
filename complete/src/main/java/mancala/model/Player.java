@@ -6,6 +6,7 @@ public class Player {
     private int[] scores;
     private String name;
     private int pitScore;
+    private boolean winner;
 
     public Player(String  name, int holes, int stones) {
         this.name = name;
@@ -49,10 +50,19 @@ public class Player {
 
     }
 
-    public void updateScoreOpponentsMove(int length) {
-        for(int i=0; i < length; i++) {
+    public int updateScoreOpponentsMove(int length) {
+
+        int iteration = length;
+
+        if(length > this.scores.length) {
+            iteration = this.scores.length;
+        }
+
+        for(int i=0; i < iteration; i++) {
             this.scores[i]++;
         }
+
+        return length - this.scores.length;
     }
 
     public int getFullScore() {
@@ -62,5 +72,13 @@ public class Player {
         }
 
         return totalScore;
+    }
+
+    public boolean isWinner() {
+        return this.winner;
+    }
+
+    public void setWinner(boolean winner) {
+        this.winner = winner;
     }
 }

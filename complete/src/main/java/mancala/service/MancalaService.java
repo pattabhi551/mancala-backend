@@ -35,10 +35,11 @@ public class MancalaService {
 
             } else {
 
-                this.mancala.getPlayer1().
+                int remaining = this.mancala.getPlayer1().
                         updateScoreOpponentsMove(this.getExcessScoreLength(this.mancala.getPlayer2(), move.getIndex()));
 
                 this.mancala.getPlayer2().updateScore(move.getIndex());
+                System.out.println("remaining indices" + remaining);
             }
 
             if(this.mancala.getPlayer1().getFullScore() == 0 || this.mancala.getPlayer2().getFullScore() == 0) {
@@ -56,11 +57,11 @@ public class MancalaService {
         return excessLength;
     }
 
-    public Player declareWinner() {
+    public void declareWinner() {
         if(this.mancala.getPlayer1().getPitScore() > this.mancala.getPlayer2().getPitScore()) {
-            return this.mancala.getPlayer1();
+            this.mancala.getPlayer1().setWinner(true);
+        } else {
+            this.mancala.getPlayer2().setWinner(true);
         }
-
-        return this.mancala.getPlayer2();
     }
 }
